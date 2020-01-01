@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import optionsGenerator from './optionsGenerator';
+import { useHistory } from 'react-router-dom';
 
 import Select from '../Select';
 import Link from './titleLink';
@@ -13,14 +14,30 @@ const Navbar = () => {
     const [year, setYear] = useState();
     const [period, setPeriod] = useState();
     const [exercise, setExercise] = useState();
+    const history = useHistory();
 
     const onChange = label => value => {
         if (label === 'year') {
             setYear(value);
+
+            if (exercise && period) {
+                history.push(
+                    `/exercise/${value.value}/${period.value}/${exercise.value}`
+                );
+            }
         } else if (label === 'period') {
             setPeriod(value);
+
+            if (exercise && year) {
+                history.push(
+                    `/exercise/${year.value}/${value.value}/${exercise.value}`
+                );
+            }
         } else if (label === 'exercise') {
             setExercise(value);
+            history.push(
+                `/exercise/${year.value}/${period.value}/${value.value}`
+            );
         }
     };
 
@@ -51,6 +68,7 @@ const Navbar = () => {
                 isDisabled={!period}
                 placeholder="Opdracht"
                 value={exercise}
+                options={optionsGenerator('Opdracht', 10)}
                 onChange={onChange('exercise')}
             />
         </Wrapper>

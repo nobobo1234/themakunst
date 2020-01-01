@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Switch, Route } from 'react-router-dom';
 import Home from '../../pages/Home';
+import Exercise from '../../pages/Exercise';
 
 const RouterPages = () => {
     return (
@@ -9,8 +10,8 @@ const RouterPages = () => {
             <Route exact path="/">
                 <Home />
             </Route>
-            <Route path="/:year/:period/:exercise">
-                <h1>Exercise</h1>
+            <Route path="/exercise/:year/:period/:exercise">
+                <Exercise />
             </Route>
         </Switch>
     );
