@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import optionsGenerator from './optionsGenerator';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import Select from '../Select';
 import Link from './titleLink';
@@ -15,6 +15,23 @@ const Navbar = () => {
     const [period, setPeriod] = useState();
     const [exercise, setExercise] = useState();
     const history = useHistory();
+    const location = useLocation();
+
+    useEffect(() => {
+        const ids = location.pathname.split('/').slice(2);
+        if (ids.length === 3) {
+            console.log(ids);
+            setYear({ value: Number(ids[0]), label: `Leerjaar ${ids[0]}` });
+            setPeriod({ value: Number(ids[1]), label: `Periode ${ids[1]}` });
+            setExercise({ value: Number(ids[2]), label: `Opdracht ${ids[2]}` });
+        }
+    }, []);
+
+    const resetInput = () => {
+        setYear('');
+        setPeriod('');
+        setExercise('');
+    };
 
     const onChange = label => value => {
         if (label === 'year') {
@@ -45,7 +62,9 @@ const Navbar = () => {
         <Wrapper>
             <Image src={logo} imgHeight="95%" />
             <GrowingDiv>
-                <Link to="/">Thema Kunst</Link>
+                <Link to="/" onClick={resetInput}>
+                    Thema Kunst
+                </Link>
             </GrowingDiv>
             <Select
                 autoFocus
