@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export default styled.div`
-    background-color: purple;
+    background: linear-gradient(to right, purple, #6A359C);
     display: flex;
     justify-content: center;
     align-items: center;

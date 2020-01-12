@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export default styled.div`
     height: 8rem;
     width: 100%;
-    background-color: purple;
+    background: linear-gradient(to right, purple, #6A359C);
     display: flex;
     align-items: center;
     padding: 0.5rem;
