@@ -7,7 +7,7 @@ import Navbar from './components/Navbar';
 
 function App() {
     return (
-        <Router>
+        <Router basename={process.env.PUBLIC_URL}>
             <Layout>
                 <Navbar />
                 <RouterPages />
